@@ -8,12 +8,16 @@ from django.views.decorators.vary import vary_on_cookie
 
 logger = logging.getLogger(__name__)
 
+def get_ip(request):
+  from django.http import HttpResponse
+  return HttpResponse(request.META['REMOTE_ADDR'])
+
 # cache this view for 300 sec
 @cache_page(300)
 @vary_on_cookie
 def index(request):
   # all posts that have pub date in the past
-  posts = Post.objects.filter(published_at__lte=timezone.now())
+  posts = Post.objects.filter(published_at__lte=timezone.now()).order_by("-published_at").select_related("author").defer("created_at", "modified_at")
   logger.debug("Got %d posts", len(posts))
   return render(request, "blog/index.html", {"posts": posts})
 
