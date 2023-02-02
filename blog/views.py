@@ -3,9 +3,14 @@ from django.utils import timezone
 from blog.models import Post
 from blog.forms import CommentForm
 import logging
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 
 logger = logging.getLogger(__name__)
 
+# cache this view for 300 sec
+@cache_page(300)
+@vary_on_cookie
 def index(request):
   # all posts that have pub date in the past
   posts = Post.objects.filter(published_at__lte=timezone.now())

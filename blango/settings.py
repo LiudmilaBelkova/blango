@@ -152,7 +152,7 @@ class Dev(Configuration):
     ]    
 
     ADMINS = [("Liudmila", "lbelkova@gmail.com")]
-    DJANGO_ADMINS 
+    DJANGO_ADMINS = [("Liudmila", "lbelkova@gmail.com")]
     LOGGING = {
         "version": 1,
         "disable_existing_loggers": False,
