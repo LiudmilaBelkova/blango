@@ -45,12 +45,15 @@ class Dev(Configuration):
 
     INSTALLED_APPS = [
         'django.contrib.admin',
+        
+        'blango_auth',
+        
         'django.contrib.auth',
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
-        'blango_auth',
+        
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
@@ -198,6 +201,10 @@ class Dev(Configuration):
             "level": "DEBUG",
         }
     }  
+
+    LOGOUT_REDIRECT_URL = "/"
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    ACCOUNT_ACTIVATION_DAYS = 7
 
 
 
