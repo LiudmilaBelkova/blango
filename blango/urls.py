@@ -25,6 +25,7 @@ from blango_auth.forms import BlangoRegistrationForm
 
 urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
+    path("accounts/", include("allauth.urls")),
     path("accounts/password_reset", blango_auth.views.password_reset, name="password_reset"),
     path("accounts/profile/", blango_auth.views.profile, name="profile"),
     path("accounts/register/",
